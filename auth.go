@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strings"
 	"sync"
@@ -103,6 +104,9 @@ func (a *Auth) CallbackHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+	atc, err := a.sc.GetAccessTokenClaims(res.AccessToken)
+	itc, err := a.sc.GetAccessTokenClaims(res.IdToken)
+	fmt.Println(atc, itc)
 	uidParts := strings.Split(res.User.Id, ";")
 	uid := uidParts[len(uidParts)-1]
 	a.userStore.Lock()

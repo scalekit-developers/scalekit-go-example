@@ -1,12 +1,11 @@
 package main
 
 import (
+	"github.com/joho/godotenv"
+	"github.com/scalekit-inc/scalekit-sdk-go"
 	"log"
 	"net/http"
 	"os"
-
-	"github.com/joho/godotenv"
-	"github.com/scalekit-inc/scalekit-sdk-go"
 )
 
 func main() {
@@ -19,6 +18,7 @@ func main() {
 	clientId := os.Getenv("SCALEKIT_CLIENT_ID")
 	clientSecret := os.Getenv("SCALEKIT_CLIENT_SECRET")
 	redirectUri := os.Getenv("AUTH_REDIRECT_URI")
+	webhookSecret := os.Getenv("SCALEKIT_WEBHOOK_SECRET")
 	host := os.Getenv("HOST")
 
 	sc := scalekit.NewScalekitClient(
@@ -27,12 +27,14 @@ func main() {
 		clientSecret,
 	)
 	auth := NewAuth(sc, host, redirectUri)
+	webhook := NewWebhook(sc, webhookSecret)
 
 	mux.Handle("/", http.FileServer(NewBuildServer()))
 	mux.HandleFunc("POST /auth/login", auth.LoginHandler)
 	mux.HandleFunc("GET /auth/callback", auth.CallbackHandler)
 	mux.HandleFunc("GET /auth/me", auth.MeHandler)
 	mux.HandleFunc("POST /auth/logout", auth.LogoutHandler)
+	mux.HandleFunc("POST /webhook", webhook.handleWebhook)
 
 	err = http.ListenAndServe(":8080", mux)
 	if err != nil {
