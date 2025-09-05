@@ -10,7 +10,7 @@
   Go Example App
 </h1>
 
-<a href="https://scalekit.com" target="_blank" rel="noopener noreferrer">Scalekit</a> is an Enterprise Authentication Platform purpose built for B2B applications. This Go SDK helps implement Enterprise Capabilities like Single Sign-on via SAML or OIDC in your Golang applications within a few hours.
+<a href="https://scalekit.com" target="_blank" rel="noopener noreferrer">Scalekit</a> is the **auth stack for AI apps** - from human authentication to agent authorization. This Go example demonstrates how to implement both traditional B2B authentication (SSO, passwordless) and cutting-edge agentic workflows using Scalekit's Go SDK.
 
 <div>
 📚 <a target="_blank" href="https://docs.scalekit.com">Documentation</a> - 🚀 <a target="_blank" href="https://docs.scalekit.com">Quick-start Guide</a> - 💻 <a target="_blank" href="https://docs.scalekit.com/apis">API Reference</a>
