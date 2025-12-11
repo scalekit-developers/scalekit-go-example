@@ -45,7 +45,7 @@ SCALEKIT_CLIENT_SECRET = client_secret
 
 ```sh
 # Run the server:
-go run main.go
+go run ./...
 ```
 
 ```sh
